@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -60,6 +60,7 @@ const App: React.FC = () => {
             {/* Fallback for other pages if needed */}
             <Route path="/pg/:slug" element={<Page />} />
             <Route path="/post/:id" element={<Page />} />
+
             {/* Generic catch-all for simpler pages */}
             <Route path="/:slug" element={<Page />} />
           </Routes>
