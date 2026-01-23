@@ -91,11 +91,20 @@ const Page: React.FC = () => {
         .replace(/aligncenter/g, 'mx-auto block')
         .replace(/alignleft/g, 'float-left mr-4 mb-4')
         .replace(/alignright/g, 'float-right ml-4 mb-4')
-        .replace(/<iframe/g, '<div class="aspect-w-16 aspect-h-9 my-8"><iframe class="w-full h-full border-0"')
+        .replace(/<iframe/g, '<div class="aspect-w-16 aspect-h-9 my-8 bg-black/50"><iframe class="w-full h-full border-0"')
         .replace(/<\/iframe>/g, '</iframe></div>')
-        // Remove fixed dimensions from images to allow responsive scaling
-        .replace(/width="\d+"/g, '')
-        .replace(/height="\d+"/g, '');
+        // Fix standard youtube links to embeds if they were just links in source but expected to be videos?
+        // Or if they are http based iframes
+        .replace(/http:\/\/www\.youtube\.com/g, 'https://www.youtube.com')
+        .replace(/http:\/\/youtube\.com/g, 'https://www.youtube.com')
+        // Clean up dimensions
+        // Fix standard youtube links to embeds if they were just links in source but expected to be videos?
+        // Or if they are http based iframes
+        .replace(/http:\/\/www\.youtube\.com/g, 'https://www.youtube.com')
+        .replace(/http:\/\/youtube\.com/g, 'https://www.youtube.com');
+    // Clean up dimensions - REMOVED to respect image sizes
+    // .replace(/width="\d+"/g, 'width="100%"')
+    // .replace(/height="\d+"/g, 'height="100%"');
 
     // If marked for small cover, enforce constraint on images
     if (pageData.custom_class === 'small-cover') {

@@ -9,8 +9,12 @@ const targetSlugs = [
 ];
 
 const Novels: React.FC = () => {
-    // Find the pages that match the slugs
-    const novels = pagesData.filter((page: any) => targetSlugs.includes(page.post_name));
+    // Find the pages that match the slugs and SORT them by the defined order
+    const novels = pagesData
+        .filter((page: any) => targetSlugs.includes(page.post_name))
+        .sort((a: any, b: any) => {
+            return targetSlugs.indexOf(a.post_name) - targetSlugs.indexOf(b.post_name);
+        });
 
     return (
         <div className="pt-32 pb-20 container mx-auto px-6 min-h-screen bg-void">

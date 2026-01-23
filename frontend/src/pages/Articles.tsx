@@ -1,3 +1,4 @@
+
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import postsData from '../data/posts.json';
@@ -39,14 +40,32 @@ const Articles: React.FC = () => {
                     'bailarinas lógicas',
                     'bailarina lógica',
                     'the logical ballerinas',
-                    'mis bailarinas lógicas', // Found in audit
+                    'mis bailarinas lógicas',
                     'curso',
                     'cursos',
                     'novela',
                     'filósofos míticos',
                     'pensadores en 2015',
                     'schopenhauer',
-                    'crítica literaria'
+                    'crítica literaria',
+                    // Specific exclusions requested by user
+                    'filosofía de la inteligencia artificial',
+                    'platón. obras completas',
+                    'el arte y la guerra',
+                    'física y metafísica',
+                    'sex puncta mystica',
+                    'escuela libre de filosofía',
+                    'programa del mes',
+                    'un aviso y el olor',
+                    'conferencia del',
+                    'conferencia del lunes',
+                    'conferencia del 21',
+                    'conferencia del 12',
+                    'conferencia del 26',
+                    'conferencia del 22',
+                    'feliz navidad',
+                    'aviso importante',
+                    'diccionario filosófico'
                 ];
 
                 if (exclusionKeywords.some(keyword => title.includes(keyword))) {
@@ -93,21 +112,26 @@ const Articles: React.FC = () => {
                         // Robust linking: Use slug if available, otherwise use ID-based route
                         const linkTarget = post.post_name ? `/${post.post_name}` : `/post/${post.post_id}`;
 
+                        // Determine image source: found image OR fallback
+                        const displayImage = imageUrl || `/images/generated/article_abstract_${(idx % 4) + 1}.png`;
+
                         return (
                             <div key={idx} className="group flex flex-col h-full hover:bg-white/5 p-4 -m-4 rounded-lg transition-colors relative">
                                 <Link to={linkTarget} className="absolute inset-0 z-10" aria-label={`Leer ${post.title}`}></Link>
 
-                                {imageUrl && (
-                                    <div className="h-48 overflow-hidden relative mb-4 rounded-sm">
-                                        <div className="absolute inset-0 bg-void/10 group-hover:bg-transparent transition object-cover" />
-                                        <img
-                                            src={imageUrl}
-                                            alt={post.title}
-                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                )}
+                                <div className="h-48 overflow-hidden relative mb-4 rounded-sm">
+                                    <div className="absolute inset-0 bg-void/10 group-hover:bg-transparent transition object-cover" />
+                                    <img
+                                        src={displayImage}
+                                        alt={post.title}
+                                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.src = '/images/generated/article_abstract_4.png';
+                                        }}
+                                    />
+                                </div>
 
                                 <h3 className="text-base font-serif text-stone-300 mb-2 leading-snug group-hover:text-white transition-colors line-clamp-2">
                                     {post.title}

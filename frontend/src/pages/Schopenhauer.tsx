@@ -2,29 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import pagesData from '../data/pages.json';
 
-const shopenhauerSlugs = [
-    { slug: 'lamagiaaccesoaschopenhauer', title: 'La magia: clave de acceso al sistema filosófico de Schopenhauer' },
-    { slug: 'die-magie-in-schopenhauers-metaphysik-ein-weg-um-uns-als-magisches-nichts-zu-erkennen', title: 'Die Magie in Schopenhauers Metaphysik' },
-    { slug: 'enfermedad-medicina-y-magia-en-el-sistema-filosofico-de-schopenhauer', title: 'Enfermedad, Medicina y Magia en el sistema filosófico de Schopenhauer' }
-];
-
 const Schopenhauer: React.FC = () => {
     // Get the main intro page
     const introPage = pagesData.find((p: any) => p.post_name === 'sobre-schopenhauer');
 
-    // Specific formatted list as requested
+    // Manually defined list to separate the Book/Essay from the Articles
     const workItems = [
         {
-            fullText: "La magia: clave de acceso al sistema filosófico de Schopenhauer. Indepentently published, 2020 (Libro de ensayo).",
-            link: "https://www.amazon.es/magia-acceso-sistema-filos%C3%B3fico-Schopenhauer/dp/B08CPB33X2" // Assuming link to book or similar
+            fullText: "La magia: clave de acceso al sistema filosófico de Schopenhauer. Indepentently published, 2020 (Libro de ensayo)",
+            link: "https://www.amazon.es/MAGIA-acceso-sistema-filosófico-Schopenhauer/dp/B0CQ86XCXH/ref=sr_1_1?__mk_es_ES=ÅMÅŽÕÑ&crid=11X1K7D0BM77F&dib=eyJ2IjoiMSJ9.aseYQtp37ZEXNPIdP5jo7Q.Q_QU2L8baOmx8if3WCgvWMtb_uQYVQrrZTXT8vUIWms&dib_tag=se&keywords=La+magia%3A+clave+de+acceso+al+sistema+filosófico+de+Schopenhauer&qid=1768296915&sprefix=la+magia+clave+de+acceso+al+sistema+filosófico+de+schopenhauer.+indepentently+published+2020+libro+de+ensayo+%2Caps%2C227&sr=8-1",
+            isExternal: true
         },
         {
-            fullText: '"Enfermedad, Medicina y Magia en el sistema filosófico de Schopenhauer". (Voluntas-Revista internacional de Filosofía, Vol. 11, Núm. 3, 2020).',
-            link: "/enfermedad-medicina-y-magia-en-el-sistema-filosofico-de-schopenhauer"
+            fullText: "Enfermedad, Medicina y Magia en el sistema filosófico de Schopenhauer. (Voluntas-Revista internacional de Filosofía, Vol. 11, Núm. 3, 2020)",
+            link: "/enfermedad-medicina-y-magia-en-el-sistema-filosofico-de-schopenhauer",
+            isExternal: false
         },
         {
-            fullText: '“Die Magie in Schopenhauers Metaphysik: ein Weg, um uns als ‘magisches Nichts’ zu erkennen” [La magia en la metafísica de Schopenhauer: una vía para conocernos como ‘nada mágica’]. (95. Jahrbuch der Schopenhauer-Gesellschaft, 2014).',
-            link: "/die-magie-in-schopenhauers-metaphysik-ein-weg-um-uns-als-magisches-nichts-zu-erkennen"
+            fullText: "Die Magie in Schopenhauers Metaphysik: ein Weg, um uns als ‘magisches Nichts’ zu erkennen [La magia en la metafísica de Schopenhauer: una vía para conocernos como ‘nada mágica’]. (95. Jahrbuch der Schopenhauer-Gesellschaft, 2014)",
+            link: "/die-magie-in-schopenhauers-metaphysik-ein-weg-um-uns-als-magisches-nichts-zu-erkennen",
+            isExternal: false
         }
     ];
 
@@ -35,38 +32,47 @@ const Schopenhauer: React.FC = () => {
                     {introPage?.title || 'Trabajos sobre Schopenhauer'}
                 </h1>
 
-                {/* Intro Content - Centered Images */}
-                {introPage && (
-                    <div
-                        className="prose prose-invert prose-lg prose-gold mx-auto font-serif leading-relaxed max-w-none mb-16
-                        prose-img:mx-auto prose-img:block prose-img:rounded-md prose-img:shadow-2xl text-justify"
-                        dangerouslySetInnerHTML={{
-                            __html: introPage.content
-                                .replace(/width="\d+"/g, '')
-                                .replace(/height="\d+"/g, '')
-                                .replace(/aligncenter/g, 'mx-auto block')
-                        }}
+                {/* Schopenhauer Portrait */}
+                <div className="flex justify-center mb-16">
+                    <img
+                        src="/images/generated/arthur_schopenhauer.png"
+                        alt="Arthur Schopenhauer"
+                        className="max-w-lg w-full h-auto rounded-sm border-2 border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] grayscale hover:grayscale-0 transition-all duration-700"
                     />
-                )}
+                </div>
 
-                {/* List of Works */}
-                <div className="space-y-8 mt-16 border-t border-white/5 pt-16">
+                {/* Intro Content Removed as requested */}
+
+
+                {/* List of Works - Visually Separated */}
+                <div className="space-y-12 mt-16 border-t border-white/5 pt-16">
                     <h2 className="text-2xl font-serif text-white text-center uppercase tracking-widest mb-12">Publicaciones Destacadas</h2>
+
                     {workItems.map((work, idx) => (
-                        <div key={idx} className="bg-void-light border border-white/5 p-8 hover:border-gold-dim/30 transition-all duration-300 group">
-                            <div className="flex flex-col md:flex-row gap-6 items-start">
+                        <div key={idx} className={`bg-void-light border ${work.isExternal ? 'border-gold-dim/30 shadow-[0_0_20px_rgba(212,175,55,0.05)]' : 'border-white/5'} p-8 md:p-10 transition-all duration-300 hover:border-gold-dim/50`}>
+                            <div className="flex flex-col md:flex-row gap-6 items-center md:items-start text-center md:text-left">
                                 <div className="flex-1">
-                                    <p className="text-lg text-stone-300 font-serif leading-relaxed group-hover:text-white transition-colors">
-                                        {/* Simple formatting for bolding dates or titles if needed, but keeping it raw text mostly */}
+                                    <h3 className={`text-xl font-serif ${work.isExternal ? 'text-gold-dim md:text-2xl' : 'text-white'} mb-4 leading-snug`}>
                                         {work.fullText}
-                                    </p>
+                                    </h3>
                                 </div>
-                                <Link
-                                    to={work.link}
-                                    className="shrink-0 px-6 py-3 border border-gold-dim/30 text-gold-dim text-xs uppercase tracking-widest hover:bg-gold-dim hover:text-black transition-all"
-                                >
-                                    Ver Publicación
-                                </Link>
+                                {work.isExternal ? (
+                                    <a
+                                        href={work.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="shrink-0 px-8 py-4 bg-gold-dim text-black font-bold text-sm uppercase tracking-widest hover:bg-white transition-all shadow-lg"
+                                    >
+                                        Ver Publicación
+                                    </a>
+                                ) : (
+                                    <Link
+                                        to={work.link}
+                                        className="shrink-0 px-6 py-3 border border-white/20 text-stone-300 text-xs uppercase tracking-widest hover:border-gold-dim hover:text-gold-dim transition-all"
+                                    >
+                                        Leer Artículo
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     ))}

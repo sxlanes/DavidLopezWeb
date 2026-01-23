@@ -18,6 +18,7 @@ import Schopenhauer from './pages/Schopenhauer';
 import BailarinasLogicas from './pages/BailarinasLogicas';
 import LiteraryCriticism from './pages/LiteraryCriticism';
 import FilosofosMiticos from './pages/FilosofosMiticos';
+import Pensadores2015 from './pages/Pensadores2015';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -53,7 +54,7 @@ const App: React.FC = () => {
             <Route path="/criticas-literarias" element={<LiteraryCriticism />} />
 
             <Route path="/filosofos-miticos-del-mitico-siglo-xx" element={<FilosofosMiticos />} />
-            <Route path="/pensadores-pensando-en-2015" element={<Page />} />
+            <Route path="/pensadores-pensando-en-2015" element={<Pensadores2015 />} />
             <Route path="/contacto" element={<Page />} />
 
             {/* Fallback for other pages if needed */}

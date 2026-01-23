@@ -149,37 +149,43 @@ const LiteraryCriticism: React.FC = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-                {reviews.filter(r => r.pdf && r.pdf.trim() !== "").map((review, idx) => (
-                    <div key={idx} className="bg-void-light border border-white/5 p-8 flex flex-col hover:border-gold-dim/30 transition-all duration-300 group">
-                        <h3 className="text-xl font-serif text-white mb-2 group-hover:text-gold-dim transition-colors">
-                            {review.author}
-                        </h3>
-                        <div className="text-lg font-bold text-gold-dim mb-4 leading-tight">
-                            {review.book}
-                        </div>
-                        <div className="text-stone-500 text-sm mb-6 border-l border-white/10 pl-4 italic">
-                            {review.publisher}
-                        </div>
+                {reviews.filter(r => r.pdf && r.pdf.trim() !== "").map((review, idx, arr) => {
+                    const isLastOdd = idx === arr.length - 1 && arr.length % 2 !== 0;
+                    return (
+                        <div
+                            key={idx}
+                            className={`bg-void-light border border-white/5 p-8 flex flex-col hover:border-gold-dim/30 transition-all duration-300 group ${isLastOdd ? 'md:col-span-2 md:w-2/3 md:mx-auto' : ''}`}
+                        >
+                            <h3 className="text-xl font-serif text-white mb-2 group-hover:text-gold-dim transition-colors">
+                                {review.author}
+                            </h3>
+                            <div className="text-lg font-bold text-gold-dim mb-4 leading-tight">
+                                {review.book}
+                            </div>
+                            <div className="text-stone-500 text-sm mb-6 border-l border-white/10 pl-4 italic">
+                                {review.publisher}
+                            </div>
 
-                        <div className="mt-auto">
-                            {review.pdf ? (
-                                <a
-                                    href={review.pdf}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-gold-dim border border-gold-dim/30 hover:bg-gold-dim hover:text-black px-4 py-2 transition-all"
-                                >
-                                    <span>Leer PDF</span>
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 01-2-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                                </a>
-                            ) : (
-                                <span className="text-xs uppercase tracking-widest text-stone-600 cursor-not-allowed">
-                                    No disponible
-                                </span>
-                            )}
+                            <div className="mt-auto">
+                                {review.pdf ? (
+                                    <a
+                                        href={review.pdf}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-gold-dim border border-gold-dim/30 hover:bg-gold-dim hover:text-black px-4 py-2 transition-all"
+                                    >
+                                        <span>Leer PDF</span>
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 01-2-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                    </a>
+                                ) : (
+                                    <span className="text-xs uppercase tracking-widest text-stone-600 cursor-not-allowed">
+                                        No disponible
+                                    </span>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

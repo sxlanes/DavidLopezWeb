@@ -43,15 +43,15 @@ export const extractImageFromContent = (content: string): string | null => {
 // 3. Return NULL if no image found (No fallback to abstract images)
 
 export const getPostImage = (post: any, index: number): string | null => {
-    // 1. Featured image from XML (Best quality usually)
+    // 1. Custom image assigned manually (Priority override for repaired/new images)
+    if (post.custom_image) return post.custom_image;
+
+    // 2. Featured image from XML
     if (post.featured_image) return post.featured_image;
 
-    // 2. Image extracted from content
+    // 3. Image extracted from content
     const contentImage = extractImageFromContent(post.content);
     if (contentImage) return contentImage;
-
-    // 3. Custom image assigned manually (only if explicitly set for specific override)
-    if (post.custom_image) return post.custom_image;
 
     // No fallback image
     return null;

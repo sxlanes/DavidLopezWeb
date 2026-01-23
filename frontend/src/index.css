@@ -6,6 +6,7 @@ body {
   background-color: #050505;
   color: #e5e5e5;
   overflow-x: hidden;
+  font-size: 18px; /* Enforcing a base font size */
 }
 
 /* Custom Scrollbar */
@@ -45,6 +46,17 @@ body {
   color: #fcd34d !important;
   /* amber-300 */
   border-bottom-color: #fcd34d;
+}
+
+/* 
+   Force Left Alignment 
+   The user explicitly requested to remove "book-style" justification.
+   We override inline styles coming from the CMS data.
+*/
+.prose p, 
+.prose div, 
+.prose span {
+  text-align: left !important;
 }
 
 /* Force Center All Images in Prose */

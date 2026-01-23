@@ -39,29 +39,31 @@ const BailarinasLogicas: React.FC = () => {
         <div className="pt-32 pb-20 container mx-auto px-6 min-h-screen bg-void text-stone-300">
             <div className="max-w-7xl mx-auto">
                 {/* Header Section */}
-                <div className="text-center mb-12">
+                <div className="relative z-10 text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-serif text-white mb-6 text-center uppercase tracking-widest relative inline-block">
                         <span className="text-gold-dim block mb-2 text-xs md:text-sm tracking-[0.3em] font-light uppercase">Diccionario Filosófico</span>
                         Las Bailarinas Lógicas
                         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-px bg-gold-dim mt-4"></span>
                     </h1>
-
-                    {/* Centered Intro Image - reduced size for better density */}
-                    {introImage && (
-                        <div className="flex justify-center mt-8 mb-8">
-                            <div className="p-1 bg-gradient-to-b from-gold-dim/20 to-transparent rounded-sm shadow-xl opacity-90 transition-opacity hover:opacity-100">
-                                <img
-                                    src={introImage}
-                                    alt="Las Bailarinas Lógicas"
-                                    className="max-w-[200px] md:max-w-[260px] w-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                                />
-                            </div>
-                        </div>
-                    )}
                 </div>
 
+                {/* Background Ballerina Image - Large, Fixed/Absolute, Low Opacity for readability */}
+                {introImage && (
+                    <div className="fixed inset-0 top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden flex items-center justify-center">
+                        <div className="relative w-full h-full max-w-4xl mx-auto opacity-[0.15]">
+                            <img
+                                src={introImage}
+                                alt="Las Bailarinas Lógicas"
+                                className="w-full h-full object-contain object-center"
+                            />
+                            {/* Gradient overlay to ensure text readability at edges */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-void"></div>
+                        </div>
+                    </div>
+                )}
+
                 {/* Content - Dictionary Columns Layout */}
-                <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8 mx-auto">
+                <div className="relative z-10 columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8 mx-auto">
                     {letters.map(letter => (
                         <div key={letter} className="break-inside-avoid-column mb-10 group">
                             <div className="flex items-center border-b border-white/10 mb-3 pb-1">
