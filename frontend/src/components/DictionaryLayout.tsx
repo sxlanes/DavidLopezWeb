@@ -71,14 +71,23 @@ const DictionaryLayout: React.FC<DictionaryLayoutProps> = ({ title, subtitle, in
                             <ul className="space-y-1">
                                 {groupedEntries[letter].map((entry, idx) => (
                                     <li key={idx}>
-                                        <a
-                                            href={entry.link}
-                                            className="block py-0.5 px-2 -mx-2 rounded hover:bg-white/5 text-sm font-serif text-stone-400 hover:text-white transition-all duration-200"
-                                            target={entry.link.startsWith('http') ? "_blank" : "_self"}
-                                            rel="noopener noreferrer"
-                                        >
-                                            {entry.term}
-                                        </a>
+                                        {entry.link.startsWith('http') ? (
+                                            <a
+                                                href={entry.link}
+                                                className="block py-0.5 px-2 -mx-2 rounded hover:bg-white/5 text-sm font-serif text-stone-400 hover:text-white transition-all duration-200"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {entry.term}
+                                            </a>
+                                        ) : (
+                                            <Link
+                                                to={entry.link}
+                                                className="block py-0.5 px-2 -mx-2 rounded hover:bg-white/5 text-sm font-serif text-stone-400 hover:text-white transition-all duration-200"
+                                            >
+                                                {entry.term}
+                                            </Link>
+                                        )}
                                     </li>
                                 ))}
                             </ul>

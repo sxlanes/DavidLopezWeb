@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import pagesData from '../data/pages.json';
 import postsData from '../data/posts.json';
+import idSlugMap from '../data/id_slug_map.json';
 
 // Normalize content to fix image paths or styling if needed
 const processContent = (content: string) => {
@@ -97,7 +98,18 @@ const Page: React.FC = () => {
         .replace(/<iframe/g, '<div class="aspect-w-16 aspect-h-9 my-8 bg-black/50"><iframe class="w-full h-full border-0"')
         .replace(/<\/iframe>/g, '</iframe></div>')
         .replace(/http:\/\/www\.youtube\.com/g, 'https://www.youtube.com')
-        .replace(/http:\/\/youtube\.com/g, 'https://www.youtube.com');
+        .replace(/http:\/\/youtube\.com/g, 'https://www.youtube.com')
+        // Rewrite WordPress Links to Local
+        .replace(/href="https?:\/\/(www\.)?davidlopez\.info\/\?p=(\d+)"/g, (match: string, www: string, id: string) => {
+            const mapped = (idSlugMap as any)[id];
+            if (mapped) return `href="/${mapped.startsWith('?p=') ? 'post/' + id : mapped}"`;
+            return `href="/post/${id}"`;
+        })
+        .replace(/href="https?:\/\/(www\.)?davidlopez\.info\/([^"]+)"/g, (match: string, www: string, path: string) => {
+            if (path.startsWith('?p=')) return match; // Handled above
+            if (path.includes('wp-content')) return match; // Images/files
+            return `href="/${path}"`;
+        });
 
     if (pageData.custom_class === 'small-cover') {
         processedContent = processedContent.replace(/<img /g, '<img class="max-w-xs mx-auto shadow-2xl rounded-sm" ');

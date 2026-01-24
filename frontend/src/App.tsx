@@ -20,6 +20,8 @@ import LiteraryCriticism from './pages/LiteraryCriticism';
 import FilosofosMiticos from './pages/FilosofosMiticos';
 import Pensadores2015 from './pages/Pensadores2015';
 
+import VideosCortos from './pages/VideosCortos';
+
 // Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -45,6 +47,7 @@ const App: React.FC = () => {
             <Route path="/libros" element={<Books />} />
             <Route path="/sobre-mi" element={<AboutMe />} />
             <Route path="/newsletter" element={<Newsletter />} />
+            <Route path="/videos-cortos" element={<VideosCortos />} />
 
             {/* Dynamic Pages from XML */}
             <Route path="/novelas" element={<Novels />} />
