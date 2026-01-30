@@ -119,41 +119,62 @@ const Page: React.FC = () => {
 
     const containerClass = pageData.custom_class === 'large-image' ? "max-w-6xl mx-auto" : "max-w-4xl mx-auto";
 
+    // Handle broken images by replacing them with local fallbacks
+    React.useEffect(() => {
+        const images = document.querySelectorAll('.article-content img');
+        images.forEach((img) => {
+            const htmlImg = img as HTMLImageElement;
+
+            // Add error handler to replace broken images
+            htmlImg.onerror = () => {
+                // Use different fallbacks based on the page/context
+                const fallbackImages = [
+                    '/images/generated/article_abstract_1.png',
+                    '/images/generated/article_abstract_2.png',
+                    '/images/generated/article_abstract_3.png',
+                    '/images/generated/article_abstract_4.png'
+                ];
+
+                // Use a deterministic fallback based on the original src
+                const srcHash = htmlImg.src.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                const fallbackIndex = srcHash % fallbackImages.length;
+
+                htmlImg.src = fallbackImages[fallbackIndex];
+                htmlImg.onerror = null; // Prevent infinite loop if fallback also fails
+            };
+        });
+    }, [processedContent]);
+
     return (
         <div className="pt-32 pb-20 container mx-auto px-6 min-h-screen bg-void text-stone-300">
             <div className={containerClass}>
                 <h1 className="text-4xl md:text-5xl font-serif text-gold-dim mb-16 text-center uppercase tracking-widest border-b border-white/5 pb-8">
                     {pageData.title}
                 </h1>
-
-                <div
-                    className="prose prose-invert prose-lg prose-gold mx-auto font-serif leading-relaxed max-w-none
-                    prose-headings:font-serif prose-headings:tracking-widest prose-headings:uppercase prose-headings:text-gold-dim
-                    prose-p:text-stone-300 prose-p:mb-6
-                    prose-a:text-gold-dim prose-a:no-underline hover:prose-a:underline
-                    prose-img:rounded-md prose-img:shadow-2xl prose-img:border prose-img:border-white/5
-                    prose-strong:text-white prose-strong:font-bold"
-                    dangerouslySetInnerHTML={{
-                        __html: processedContent + (
-                            dictionaryIndices.some((d: any) => d.slug === (slug || pageData?.post_name))
-                                ? '<p style="margin-top: 2em; text-align: right; font-style: italic;">David López, PhD.</p>'
-                                : ''
-                        )
-                    }}
-                    onClick={(e) => {
-                        const target = e.target as HTMLElement;
-                        const link = target.closest('a');
-                        if (link) {
-                            const href = link.getAttribute('href');
-                            if (href && (href.startsWith('/') || href.includes(window.location.hostname) || href.includes('localhost'))) {
-                                // If using HashRouter, we should update the hash
-                                const path = href.startsWith('/') ? href : new URL(href).pathname;
-                                e.preventDefault();
-                                window.location.hash = path;
+                <article className="prose prose-invert max-w-none article-content">
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: processedContent + (
+                                dictionaryIndices.some((d: any) => d.slug === (slug || pageData?.post_name))
+                                    ? '<p style="margin-top: 2em; text-align: right; font-style: italic;">David López, PhD.</p>'
+                                    : ''
+                            )
+                        }}
+                        onClick={(e) => {
+                            const target = e.target as HTMLElement;
+                            const link = target.closest('a');
+                            if (link) {
+                                const href = link.getAttribute('href');
+                                if (href && (href.startsWith('/') || href.includes(window.location.hostname) || href.includes('localhost'))) {
+                                    // If using HashRouter, we should update the hash
+                                    const path = href.startsWith('/') ? href : new URL(href).pathname;
+                                    e.preventDefault();
+                                    window.location.hash = path;
+                                }
                             }
-                        }
-                    }}
-                />
+                        }}
+                    />
+                </article>
             </div>
         </div>
     );
