@@ -21,6 +21,7 @@ import FilosofosMiticos from './pages/FilosofosMiticos';
 import Pensadores2015 from './pages/Pensadores2015';
 
 import VideosCortos from './pages/VideosCortos';
+import Contact from './pages/Contact';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -58,7 +59,7 @@ const App: React.FC = () => {
 
             <Route path="/filosofos-miticos-del-mitico-siglo-xx" element={<FilosofosMiticos />} />
             <Route path="/pensadores-pensando-en-2015" element={<Pensadores2015 />} />
-            <Route path="/contacto" element={<Page />} />
+            <Route path="/contacto" element={<Contact />} />
 
             {/* Fallback for other pages if needed */}
             <Route path="/pg/:slug" element={<Page />} />

@@ -3,6 +3,7 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 import pagesData from '../data/pages.json';
 import postsData from '../data/posts.json';
 import idSlugMap from '../data/id_slug_map.json';
+import dictionaryIndices from '../data/dictionaryIndices.json';
 
 // Normalize content to fix image paths or styling if needed
 const processContent = (content: string) => {
@@ -99,6 +100,7 @@ const Page: React.FC = () => {
         .replace(/<\/iframe>/g, '</iframe></div>')
         .replace(/http:\/\/www\.youtube\.com/g, 'https://www.youtube.com')
         .replace(/http:\/\/youtube\.com/g, 'https://www.youtube.com')
+        .replace(/https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)/g, 'https://www.youtube.com/watch?v=$1')
         // Rewrite WordPress Links to Local
         .replace(/href="https?:\/\/(www\.)?davidlopez\.info\/\?p=(\d+)"/g, (match: string, www: string, id: string) => {
             const mapped = (idSlugMap as any)[id];
@@ -131,7 +133,13 @@ const Page: React.FC = () => {
                     prose-a:text-gold-dim prose-a:no-underline hover:prose-a:underline
                     prose-img:rounded-md prose-img:shadow-2xl prose-img:border prose-img:border-white/5
                     prose-strong:text-white prose-strong:font-bold"
-                    dangerouslySetInnerHTML={{ __html: processedContent }}
+                    dangerouslySetInnerHTML={{
+                        __html: processedContent + (
+                            dictionaryIndices.some((d: any) => d.slug === (slug || pageData?.post_name))
+                                ? '<p style="margin-top: 2em; text-align: right; font-style: italic;">David López, PhD.</p>'
+                                : ''
+                        )
+                    }}
                     onClick={(e) => {
                         const target = e.target as HTMLElement;
                         const link = target.closest('a');

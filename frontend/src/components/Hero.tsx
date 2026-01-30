@@ -25,7 +25,7 @@ const clubSubmenu = [
 const novelList = [
   { label: "Las manos de Julia", to: "/las-manos-de-julia-novela" },
   { label: "El bosque de albaricoques", to: "/el-bosque-de-albaricoques" },
-  { label: "El nuevo filósofo del martillo", to: "/el-nuevo-filosofo-del-martillo-novela" },
+  { label: "El filósofo del martillo", to: "/el-nuevo-filosofo-del-martillo-novela" },
 ];
 
 const schopenhauerSubmenu = [
@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         {/* User uploaded background image */}
         {/* User uploaded background image */}
-        <div className="absolute inset-0 bg-[url('/images/uploaded/hero_background_new.jpg')] bg-cover bg-center opacity-70 scale-105 saturate-0 contrast-125"></div>
+        <div className="absolute inset-0 bg-[url('/images/uploaded/hero_background_high_res.jpg')] bg-cover bg-center opacity-80 saturate-0 contrast-110"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-void via-void/50 to-void"></div>
       </div>
 
@@ -73,8 +73,8 @@ const Hero: React.FC = () => {
         <h1 className="text-5xl md:text-7xl font-serif text-gold-dim tracking-tight mb-4 uppercase">
           David López
         </h1>
-        <p className="text-stone-400 font-serif text-xs md:text-sm tracking-widest lowercase italic">
-          doctor en filosofía
+        <p className="text-stone-300 font-serif text-lg md:text-xl tracking-widest italic">
+          Doctor en Filosofía
         </p>
       </div>
 

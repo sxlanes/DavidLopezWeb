@@ -47,6 +47,13 @@ const FilosofosMiticos: React.FC = () => {
                 return { term, link };
             })
             .filter(entry => entry.term.length > 1 && entry.link)
+            .filter(entry => {
+                // Filter out external links that are likely garbage/ads (not internal or davidlopez related)
+                if (entry.link.startsWith('http') && !entry.link.includes('davidlopez.info')) {
+                    return false;
+                }
+                return true;
+            })
             .sort((a, b) => a.term.localeCompare(b.term, 'es', { sensitivity: 'base' }));
     }, [pageData]);
 

@@ -22,15 +22,20 @@ const Novels: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 {novels.map((novel: any, idx: number) => {
+                    // Custom Covers Map
+                    const customCovers: Record<string, string> = {
+                        'el-bosque-de-albaricoques': 'https://www.davidlopez.info/wp-content/uploads/2021/05/PORTADA-BOSQUE-ALBARICOQUES.jpg'
+                    };
+
                     // Use custom cover if available, else extract from content, else fallback
                     const imgMatch = novel.content.match(/src="([^"]+)"/);
-                    const imageUrl = novel.custom_cover || (imgMatch ? imgMatch[1] : 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80');
+                    const imageUrl = customCovers[novel.post_name] || novel.custom_cover || (imgMatch ? imgMatch[1] : 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80');
 
                     // Force small cover layout for consistency as requested
                     const isSmallCover = true;
 
                     return (
-                        <Link to={`/${novel.post_name}`} key={idx} className="group block bg-void-light border border-white/5 hover:border-gold-dim/30 transition-all duration-500 overflow-hidden">
+                        <Link to={`/${novel.post_name}`} key={idx} className="group block bg-void-light border border-white/5 hover:border-gold-dim/30 transition-all duration-500 overflow-hidden flex flex-col h-full">
                             <div className="aspect-[2/3] overflow-hidden relative flex items-center justify-center bg-void-darker">
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all z-10" />
                                 <img
@@ -40,10 +45,10 @@ const Novels: React.FC = () => {
                                         }`}
                                 />
                             </div>
-                            <div className="p-8">
-                                <h3 className="text-xl font-serif text-white mb-4 leading-relaxed group-hover:text-gold-dim transition-colors">{novel.title}</h3>
+                            <div className="p-8 flex-1 flex flex-col">
+                                <h3 className="text-xl font-serif text-white mb-6 leading-relaxed group-hover:text-gold-dim transition-colors">{novel.title}</h3>
                                 <div
-                                    className="text-stone-400 text-sm mb-6 flex-1 line-clamp-5 leading-relaxed"
+                                    className="text-stone-400 text-sm mb-8 flex-1 line-clamp-5 leading-relaxed"
                                     dangerouslySetInnerHTML={{
                                         __html: novel.content
                                             ? novel.content
@@ -54,7 +59,11 @@ const Novels: React.FC = () => {
                                             : ''
                                     }}
                                 />
-                                <span className="text-xs uppercase tracking-widest text-gold-dim border-b border-gold-dim/30 pb-1 group-hover:border-gold-dim transition-all">Leer Más</span>
+                                <div className="mt-auto">
+                                    <span className="inline-block bg-void border border-gold-dim text-gold-dim text-xs uppercase tracking-widest px-6 py-3 hover:bg-gold-dim hover:text-black transition-all font-bold">
+                                        Más Información
+                                    </span>
+                                </div>
                             </div>
                         </Link>
                     );

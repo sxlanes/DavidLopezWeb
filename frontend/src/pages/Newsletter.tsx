@@ -16,9 +16,9 @@ const Newsletter: React.FC = () => {
             <div className="max-w-2xl w-full bg-void-light/50 backdrop-blur-sm border border-white/5 p-12 md:p-16 text-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-dim/50 to-transparent"></div>
 
-                <h1 className="text-3xl md:text-4xl font-serif text-white mb-6 tracking-wide">Círculo de Lectores</h1>
+                <h1 className="text-3xl md:text-4xl font-serif text-white mb-6 tracking-wide">Es gratis</h1>
                 <p className="text-stone-400 mb-10 text-base md:text-lg leading-relaxed max-w-lg mx-auto font-light">
-                    Únete a nuestra comunidad de pensamiento. Recibe en tu correo reflexiones inéditas, acceso anticipado a nuevos cursos y fragmentos de mi próxima obra literaria.
+                    Estarás puntualmente informado de cualquier nuevo curso, conferencia, artículo u obra de David López. Y de muchas cosas más.
                 </p>
 
                 {status === 'success' ? (

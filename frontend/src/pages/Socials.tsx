@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Instagram, Linkedin, Youtube, Facebook } from 'lucide-react';
 
 const Socials: React.FC = () => {
     const socialLinks = [
@@ -18,18 +18,18 @@ const Socials: React.FC = () => {
             desc: 'Trayectoria académica y profesional.'
         },
         {
-            name: 'X (Twitter)',
-            url: 'https://twitter.com/HuertoInfinito',
-            icon: Twitter,
-            handle: '@HuertoInfinito',
-            desc: 'Pensamientos breves y diálogo.'
+            name: 'YouTube',
+            url: 'https://www.youtube.com/@DavidLopezFilosofia',
+            icon: Youtube,
+            handle: 'David López Filosofía',
+            desc: 'Conferencias y vídeos.'
         },
         {
-            name: 'Email',
-            url: 'mailto:contacto@davidlopez.info',
-            icon: Mail,
-            handle: 'contacto@davidlopez.info',
-            desc: 'Contacto directo.'
+            name: 'Facebook',
+            url: 'https://www.facebook.com/davidlopezfilosofia',
+            icon: Facebook,
+            handle: 'David López',
+            desc: 'Comunidad y eventos.'
         }
     ];
 
