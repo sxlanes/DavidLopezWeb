@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         {/* User uploaded background image */}
         {/* User uploaded background image */}
-        <div className="absolute inset-0 bg-[url('/images/uploaded/hero_background_high_res.jpg')] bg-cover bg-center opacity-80 saturate-0 contrast-110"></div>
+        <div className="absolute inset-0 bg-[url('/images/uploaded/hero_background_high_res.jpg')] bg-cover bg-center opacity-100 saturate-0 contrast-110"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-void via-void/50 to-void"></div>
       </div>
 

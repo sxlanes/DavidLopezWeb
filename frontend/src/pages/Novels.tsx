@@ -24,7 +24,7 @@ const Novels: React.FC = () => {
                 {novels.map((novel: any, idx: number) => {
                     // Custom Covers Map
                     const customCovers: Record<string, string> = {
-                        'el-bosque-de-albaricoques': 'https://www.davidlopez.info/wp-content/uploads/2021/05/PORTADA-BOSQUE-ALBARICOQUES.jpg'
+                        'el-bosque-de-albaricoques': '/images/bosque_cover_final.png'
                     };
 
                     // Use custom cover if available, else extract from content, else fallback

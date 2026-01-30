@@ -7,15 +7,15 @@ import postsData from '../data/posts.json';
 const Courses: React.FC = () => {
     // Specific Course configuration with Slugs
     const courseConfig = [
-        { slug: "platon-obras-completas", displayTitle: "PLATÓN. OBRAS COMPLETAS", imageFallback: "https://www.davidlopez.info/wp-content/uploads/2012/10/Plat%C3%B3n-y-los-di%C3%A1logos-2-1024x768.jpg" }, // Found in search
-        { slug: "nuevo-curso-online", displayTitle: "SCHOPENHAUER. OBRAS E IDEAS COMPLETAS", imageFallback: "https://www.davidlopez.info/wp-content/uploads/2013/05/Schopenhauer-y-el-dolor-del-mundo-1.jpg" },
-        { slug: "nuevo-curso-online-fisica-y-metafisica-de-la-inteligencia-artificial", displayTitle: "FÍSICA Y METAFÍSICA DE LA INTELIGENCIA ARTIFICIAL", imageFallback: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000" },
-        { slug: "poderosos-conceptos", displayTitle: "PODEROSOS CONCEPTOS" },
-        { slug: "curso-de-filosofia-del-arte", displayTitle: "FILOSOFÍA DEL ARTE" },
-        { slug: "curso-de-filosofia-de-la-ciencia", displayTitle: "FILOSOFÍA DE LA CIENCIA" },
-        { slug: "la-gran-metafisica", displayTitle: "LA GRAN METAFÍSICA" },
-        { slug: "filosofia-de-la-politica", displayTitle: "FILOSOFÍA DE LA POLÍTICA" },
-        { slug: "filosofia-y-actualidad-conferencias-interactivas", displayTitle: "FILOSOFÍA Y ACTUALIDAD (Conferencias-debate)" }
+        { slug: "platon-obras-completas", displayTitle: "PLATÓN. OBRAS COMPLETAS", imageFallback: "/images/generated/course_platon.png" },
+        { slug: "nuevo-curso-online", displayTitle: "SCHOPENHAUER. OBRAS E IDEAS COMPLETAS", imageFallback: "/images/generated/course_schopenhauer.png" },
+        { slug: "nuevo-curso-online-fisica-y-metafisica-de-la-inteligencia-artificial", displayTitle: "FÍSICA Y METAFÍSICA DE LA INTELIGENCIA ARTIFICIAL", imageFallback: "/images/generated/ai_physics_cover.png" },
+        { slug: "poderosos-conceptos", displayTitle: "PODEROSOS CONCEPTOS", imageFallback: "/images/generated/course_conceptos_v2.png" },
+        { slug: "curso-de-filosofia-del-arte", displayTitle: "FILOSOFÍA DEL ARTE", imageFallback: "/images/generated/course_arte_v2.png" },
+        { slug: "curso-de-filosofia-de-la-ciencia", displayTitle: "FILOSOFÍA DE LA CIENCIA", imageFallback: "/images/generated/course_ciencia.png" },
+        { slug: "la-gran-metafisica", displayTitle: "LA GRAN METAFÍSICA", imageFallback: "/images/generated/course_metafisica.png" },
+        { slug: "filosofia-de-la-politica", displayTitle: "FILOSOFÍA DE LA POLÍTICA", imageFallback: "/images/generated/course_politica_v2.png" },
+        { slug: "filosofia-y-actualidad-conferencias-interactivas", displayTitle: "FILOSOFÍA Y ACTUALIDAD (Conferencias-debate)", imageFallback: "/images/generated/article_abstract_1.png" }
     ];
 
     // Combine data sources
