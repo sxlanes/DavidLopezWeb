@@ -9,8 +9,8 @@ const AboutMe: React.FC = () => {
                 <div className="mb-12 relative w-64 h-64 md:w-80 md:h-80">
                     <div className="absolute inset-0 border border-gold-dim/30 rounded-full transform rotate-6 scale-105"></div>
                     <img
-                        src="/images/generated/meditacion_diaria.png"
-                        alt="David López - Filosofía"
+                        src="https://www.davidlopez.info/wp-content/uploads/2020/03/David-López-scaled.jpeg"
+                        alt="David López"
                         className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700 ease-out border-2 border-void-light shadow-2xl"
                     />
                 </div>

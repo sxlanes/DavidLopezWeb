@@ -113,19 +113,6 @@ const Page: React.FC = () => {
             return `href="/${path}"`;
         });
 
-    // Replace ANY external image from davidlopez.info with a local abstract fallback to avoid 503 errors
-    // Cycling through abstract images based on length of content to be purely deterministic
-    const abstractImages = [
-        '/images/generated/article_abstract_1.png',
-        '/images/generated/article_abstract_2.png',
-        '/images/generated/article_abstract_3.png',
-        '/images/generated/article_abstract_4.png'
-    ];
-    processedContent = processedContent.replace(/src="https?:\/\/(www\.)?davidlopez\.info\/[^"]+"/g, () => {
-        const randomImg = abstractImages[Math.floor(Math.random() * abstractImages.length)];
-        return `src="${randomImg}"`;
-    });
-
     if (pageData.custom_class === 'small-cover') {
         processedContent = processedContent.replace(/<img /g, '<img class="max-w-xs mx-auto shadow-2xl rounded-sm" ');
     }

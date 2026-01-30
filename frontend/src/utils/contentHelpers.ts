@@ -51,12 +51,6 @@ export const getPostImage = (post: any, index: number): string | null => {
 
     // 3. Image extracted from content
     const contentImage = extractImageFromContent(post.content);
-
-    // FILTER: Ignore images from legacy/unreachable domain to force fallback to local assets
-    if (contentImage && contentImage.includes('davidlopez.info')) {
-        return null;
-    }
-
     if (contentImage) return contentImage;
 
     // No fallback image
